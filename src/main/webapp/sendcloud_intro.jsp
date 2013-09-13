@@ -72,13 +72,12 @@
           <span class="page-meta">专业的触发邮发送平台</span>
         </h2>
 
-
         <!-- Breadcrumb -->
         <div class="bread-crumb pull-right">
-          <a href="http://responsivewebinc.com/premium/metroking/index.html"><i class="icon-home"></i> Home</a> 
+          <a href="index.jsp"><i class="icon-home"></i> 主页</a> 
           <!-- Divider -->
           <span class="divider">/</span> 
-          <a href="http://responsivewebinc.com/premium/metroking/#" class="bread-current">Dashboard</a>
+          <a href="sendcloud_intro.jsp" class="bread-current">sendcloud</a>
         </div>
 
         <div class="clearfix"></div>

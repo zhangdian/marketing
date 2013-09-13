@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jstl/fn"%>
 <div class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
@@ -8,7 +12,7 @@
             <span class="icon-bar"></span>
       </a>
       <!-- Site name for smallar screens -->
-      <a href="http://blog.bd17kaka.net" class="brand"><span class="bold">bd17kaka</span></a>
+      <a href="http://blog.bd17kaka.net" class="brand"><span class="bold">Anthor</span></a>
 
       <!-- Navigation starts -->
       <div class="nav-collapse collapse">        
@@ -16,15 +20,16 @@
         <!-- Links -->
         <ul class="nav pull-right">
           <li class="dropdown pull-right">            
-            <a data-toggle="dropdown" class="dropdown-toggle" href="http://responsivewebinc.com/premium/metroking/#">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <img src="./img/user.jpg" alt="" class="nav-user-pic"> Admin <b class="caret"></b>              
             </a>
             
             <!-- Dropdown menu -->
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-user"></i> 个人资料</a></li>
-              <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
-              <li><a href="#"><i class="icon-off"></i> 退出</a></li>
+              <li><a href="#"><i class="icon-user"></i>我的信息</a></li>
+              <li><a href="#"><i class="icon-cogs"></i>设置</a></li>
+              <li><a href="#"><i class="icon-off"></i>退出</a></li>
+              <li><a href="#"><i class="icon-off"></i>注册</a></li>
             </ul>
           </li>
           
