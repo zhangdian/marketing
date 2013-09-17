@@ -29,6 +29,7 @@ public class UserInfoDaoImpl extends SpringJDBCDaoSupport implements
 		int[] argTypes = new int[] { 
 				Types.VARCHAR, 
 				Types.VARCHAR,
+				Types.VARCHAR,
 				Types.INTEGER, 
 				Types.INTEGER};
 		return 0 < this.getJdbcTemplate().update(sql, args, argTypes);

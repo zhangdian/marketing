@@ -14,7 +14,7 @@
 
 <!-- Stylesheets -->
 <link href="./css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="./css/font-awesome.css">
+<link rel="stylesheet" href="login_files/font-awesome.css">
 <link href="./css/style.css" rel="stylesheet">
 <link href="./css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -40,8 +40,10 @@
 						<div class="widget-content">
 							<div class="padd">
 
-								<form class="form-horizontal" id="register_form" method="post" action="register.do">
+								<form class="form-horizontal" id="register_form">
 									<!-- Registration form starts -->
+									<div class="alert alert-error" style="display: none;" id="alert_msg">
+                    				</div>
 									<!-- Name -->
 									<div class="control-group">
 										<label class="control-label" for="user_name">用户名</label>
@@ -73,10 +75,10 @@
 									<!-- Accept box and button s-->
 									<div class="control-group">
 										<div class="controls">
-											<label class="checkbox"> <input type="checkbox">
-												Accept Terms &amp; Conditions
+											<label class="checkbox"> <input type="checkbox" checked="checked">
+												同意我们的条款
 											</label> <br>
-											<button type="submit" class="btn btn-danger" id="register_submit">注册</button>
+											<button type="button" class="btn btn-danger" id="register_submit" name="register_submit">注册</button>
 											<button type="reset" class="btn btn-success">取消</button>
 										</div>
 									</div>
@@ -85,7 +87,7 @@
 							</div>
 						</div>
 						<div class="widget-foot">
-							已经注册? <a href="login.html">登陆</a>
+							已经注册? <a href="login.jsp">登陆</a>
 						</div>
 					</div>
 				</div>
@@ -99,10 +101,46 @@
 	<script src="./js/jquery.js"></script>
 	<script src="./js/bootstrap.js"></script>
 	<script type="text/javascript">
+	
 		$("#register_submit").click(function() {
-			$("#register_form").submit();
-		}
+			
+			var user_name = $("#register_form #user_name").val();
+			var passwd = $("#register_form #passwd").val();
+			var re_passwd = $("#register_form #re_passwd").val();
+			var email = $("#register_form #email").val();
+			
+			/* TODO: 参数检查 */
+			
+			var params = "user_name="+user_name+"&passwd="+passwd+"&re_passwd="+re_passwd+"&email="+email;
+			var surl = "/register.do";
+			$.ajax({
+				type : "POST",
+				timeout : 2000,
+				url : surl,
+				dataType : "text",
+				data : params,	
+				cache : false,
+				async : true,
+				global : false,
+				success : function(data) {
+					data = $.trim(data);
+					if (data == "success") {
+						$("#register_form #alert_msg").html("注册成功，<a href=\"login.jsp\">去登陆</a>");
+					} else if (data == "fail") {
+						$("#register_form #alert_msg").html("注册失败，请重新注册");
+					} else if (data == "error") {
+						$("#register_form #alert_msg").html("参数错误，请检查参数后提交");
+					} 
+					$("#register_form #alert_msg").show();
+
+				},
+				error : function(t, v) {
+					$("#register_form #alert_msg").html("系统错误"+t+v);
+					$("#register_form #alert_msg").show();
+				}
+			});
+			
+		});
 	</script>
-}) ;
 </body>
 </html>

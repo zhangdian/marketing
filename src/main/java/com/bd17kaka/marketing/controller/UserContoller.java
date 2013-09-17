@@ -30,13 +30,15 @@ public class UserContoller extends BaseController {
 
 		String userName = StringUtils.trimToEmpty(request.getParameter("user_name"));
 		String passwd = StringUtils.trimToEmpty(request.getParameter("passwd"));
+		String rePasswd = StringUtils.trimToEmpty(request.getParameter("re_passwd"));
 		String email = StringUtils.trimToEmpty(request.getParameter("email"));
 		
 		if (StringUtils.isEmpty(userName) || 
 				StringUtils.isEmpty(passwd) ||
+				StringUtils.isEmpty(passwd) ||
 				StringUtils.isEmpty(email)) {
 		
-			writePlain(request, response, "注册信息有误");
+			writePlain(request, response, "error");
 			return;
 			
 		}
@@ -46,8 +48,8 @@ public class UserContoller extends BaseController {
 		// 保存用户信息
 		UserInfo userInfo = new UserInfo(0, userName, passwd, email, 0, 0, Calendar.getInstance().getTime()); 
 		boolean rs = userService.insert(userInfo);
-		if (rs)	writePlain(request, response, "注册成功");
-		else	writePlain(request, response, "注册失败，请重新注册");
+		if (rs)	writePlain(request, response, "success");
+		else	writePlain(request, response, "fail");
 		
 	}
 }

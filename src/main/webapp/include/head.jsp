@@ -1,7 +1,11 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jstl/fn"%>
+<%
+String is_login = StringUtils.trimToEmpty(request.getParameter("is_login"));
+%>
 <div class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
@@ -26,10 +30,14 @@ pageEncoding="UTF-8"%>
             
             <!-- Dropdown menu -->
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-user"></i>我的信息</a></li>
-              <li><a href="#"><i class="icon-cogs"></i>设置</a></li>
-              <li><a href="#"><i class="icon-off"></i>退出</a></li>
-              <li><a href="#"><i class="icon-off"></i>注册</a></li>
+	           	<% if(is_login.startsWith("true")) {%>
+	            	<li><a href="#"><i class="icon-user"></i>我的信息</a></li>
+	              	<li><a href="#"><i class="icon-cogs"></i>设置</a></li>
+	              	<li><a href="#"><i class="icon-off"></i>退出</a></li>
+            	<% } else {%>
+	              	<li><a href="#"><i class="icon-off"></i>登陆</a></li>
+	              	<li><a href="register.jsp"><i class="icon-off"></i>注册</a></li>
+            	<% }%>
             </ul>
           </li>
           
