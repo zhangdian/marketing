@@ -1,8 +1,10 @@
 package com.bd17kaka.marketing.dao;
 
 import java.sql.Types;
+import java.util.List;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.bd17kaka.marketing.po.UserInfo;
@@ -35,4 +37,14 @@ public class UserInfoDaoImpl extends SpringJDBCDaoSupport implements
 		return 0 < this.getJdbcTemplate().update(sql, args, argTypes);
 	}
 
+	@Override
+	public UserInfo get(String userName, String passwd) {
+		String sql = "select * from " + TableName + " where user_name=? and passwd=?";
+		Object[] args = new Object[]{userName, passwd};
+		int[] argTypes = new int[]{Types.VARCHAR, Types.VARCHAR};
+		List<UserInfo> listUser = this.getJdbcTemplate().query(sql, args, argTypes, ParameterizedBeanPropertyRowMapper.newInstance(UserInfo.class));
+		if(listUser == null || listUser.size() <= 0) return null;
+		return listUser.get(0);
+	}
+	
 }

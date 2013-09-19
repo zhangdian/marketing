@@ -14,5 +14,14 @@ public interface UserService {
      * @return
      */
     boolean insert(UserInfo userInfo);
+    
+    /**
+	 * 用户登录
+	 * 
+	 * @param userId
+	 * @param passwd
+	 * @return
+	 */
+	UserInfo userLogin(String userName, String passwd);
 	
 }

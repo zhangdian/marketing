@@ -39,7 +39,8 @@ String selected_item = request.getParameter("selected_item");
               <ul>
                 <li><a href="./sendcloud_intro.jsp">简介</a></li>
                 <li><a href="./sendcloud_how2use.jsp">使用介绍</a></li>
-                <li><a href="./sendcloud_task.jsp">任务</a></li>
+                <li><a href="./initSCTask.do">任务</a></li>
+                <li><a href="./sc_setting.jsp">设置</a></li>
               </ul>
             </li>
 

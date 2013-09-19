@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -15,14 +17,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-
-
 public class SCUtils {
 	
-	private static int SC_STATUS_SUCCESS = 0;
-	private static int SC_STATUS_FAIL= 1;
-	
-	public static int sendMailUsingSC(
+	public static JSONObject sendMailUsingSC(
 			String apiUser, 
 			String apiKey, 
 			String from, 
@@ -32,7 +29,7 @@ public class SCUtils {
 			String templateInvokeName,
 			String respEmailId
 			) {
-		String url = "https://sendcloud.sohu.com/webapi/mail.send_template.xml";
+		String url = "https://sendcloud.sohu.com/webapi/mail.send_template.json";
 		HttpClient httpclient = new DefaultHttpClient();
 		// httpclient = wrapHttpClient(httpclient);
 		HttpPost httpost = new HttpPost(url);
@@ -47,7 +44,7 @@ public class SCUtils {
 		nvps.add(new BasicNameValuePair("label", label));
 		nvps.add(new BasicNameValuePair("subject", subject));
 		nvps.add(new BasicNameValuePair("template_invoke_name", templateInvokeName));  
-		nvps.add(new BasicNameValuePair("resp_email_id", "true"));
+		nvps.add(new BasicNameValuePair("resp_email_id", respEmailId));
 
 		try {
 			httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
@@ -57,18 +54,23 @@ public class SCUtils {
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) { // 正常返回
 				// 读取xml文档
 				String result = EntityUtils.toString(response.getEntity());
-				System.out.println(result);
-			} else {
-				System.err.println("error");
-			}
+				return JSONObject.fromObject(result);
+			} 
 			
 		} catch (UnsupportedEncodingException e) {
 		} catch (ClientProtocolException e) {
 		} catch (IOException e) {
 		}
 		
-		System.out.println("success");
-		return SCUtils.SC_STATUS_SUCCESS;
+		return null;
+	}
+	
+	public static void main(String[] args) {
+		/**
+		 * to=bd17kaka_list1@zhangdian123.sendcloud.org&use_maillist=true&label=308&subject=testMarketing&template_invoke_name=bd17kaka_model2&resp_email_id=true
+		 */
+		System.out.println(sendMailUsingSC("postmaster@zhangdian234.sendcloud.org", "Tv5hT89C", 
+				"zhangdian@163.com", "bd17kaka_list1@zhangdian123.sendcloud.org", "308", "testMarketing", "bd17kaka_model2", "true"));
 		
 	}
 }

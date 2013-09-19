@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bd17kaka.marketing.constant.ConstatVar;
+import com.bd17kaka.marketing.po.UserInfo;
+
 /**
  * 身份验证filter
  * @author bd17kaka
@@ -34,23 +37,22 @@ public class IdentityFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 
 		// 获取保存在session中的用户名
-		String user = (String) req.getSession().getAttribute("kankantu_user");
+		UserInfo userInfo = (UserInfo) req.getSession().getAttribute(ConstatVar.LOGIN_SESSION);
 
 		// 获取请求的URL
 		String srcUrl = req.getRequestURL().toString();
 		String[] tokens = srcUrl.split("/");
 		String url = tokens[tokens.length - 1];
 		if (url.equals("index.jsp") ||
-				url.equals("signup.jsp") ||
-				url.equals("signup.do")) {
+				url.equals("login.jsp") ||
+				url.equals("login.do") || 
+				url.equals("register.jsp") ||
+				url.equals("register.do") ) {
 			chain.doFilter(req, resp);
 
-		}else if(url.equals("login.do")){
-			chain.doFilter(req, resp);
-		}
-		else if (user == null) {
+		} else if (userInfo == null) {
 			// 用户没有登陆
-			resp.sendRedirect("index.jsp");
+			resp.sendRedirect("login.jsp");
 		} else {
 			// 登陆了的用户
 			chain.doFilter(req, resp);
@@ -58,7 +60,7 @@ public class IdentityFilter implements Filter {
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		Log.info(" IdentityFilter init");
+		Log.info("IdentityFilter init");
 	}
 
 }

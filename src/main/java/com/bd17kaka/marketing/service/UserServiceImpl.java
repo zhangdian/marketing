@@ -21,5 +21,10 @@ public class UserServiceImpl implements UserService {
 	public boolean insert(UserInfo userInfo) {
 		return userInfoDao.insert(userInfo);
 	}
+
+	@Override
+	public UserInfo userLogin(String userName, String passwd) {
+		return userInfoDao.get(userName, passwd);
+	}
   
 }

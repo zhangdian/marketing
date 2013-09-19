@@ -127,110 +127,11 @@
 
 					<div class="row-fluid">
 
-						<div class="span12">
+						<div class="span6">
 
 							<div class="widget worange">
 								<div class="widget-head">
-									<div class="pull-left">创建任务</div>
-									<div class="widget-icons pull-right">
-										<a href="#" class="wminimize"><i class="icon-chevron-down"></i></a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-								<div class="widget-content" style="display: none">
-									<div class="padd">
-
-										<div class="row-fluid">
-
-											<div class="span12">
-												
-												<form id="sc_create_task_form" class="form-horizontal">
-													<div class="alert alert-error" style="display: none;"
-														id="alert_msg"></div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_name">任务名称</label>
-														<div class="controls">
-															<input type="text" id="sc_task_name"
-																name="sc_task_name" placeholder=""> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_model_name">模板名称</label>
-														<div class="controls">
-															<input type="text" id="sc_task_model_name"
-																name="sc_task_model_name" placeholder=""> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_label_id">标签ID</label>
-														<div class="controls">
-															<input type="text" id="sc_task_label_id"
-																name="sc_task_label_id"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_alias_address">邮件列表别名地址</label>
-														<div class="controls">
-															<input type="text" id="sc_task_alias_address"
-																name="sc_task_alias_address"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_from">发信人</label>
-														<div class="controls">
-															<input type="text" id="sc_task_from"
-																name="sc_task_from"> <span class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_subject">主题</label>
-														<div class="controls">
-															<input type="text" id="sc_task_subject"
-																name="sc_task_subject"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_subaccount">子账号</label>
-														<div class="controls">
-															<input type="text" id="sc_task_subaccount"
-																name="sc_task_subaccount"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_psw">子账号密码</label>
-														<div class="controls">
-															<input type="password" id="sc_task_psw"
-																name="sc_task_psw"> <span class="help-inline"></span>
-														</div>
-													</div>
-													<!-- Remember me checkbox and sign in button -->
-													<div class="control-group">
-														<div class="controls">
-															<button type="button" class="btn btn-danger" id="sc_create_tesk_submit" name="sc_create_tesk_submit">提交</button>
-															<button type="reset" class="btn">重置</button>
-														</div>
-													</div>
-												</form>
-
-											</div>
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							
-							<!-- task list -->
-							<div class="widget wviolet">
-								<div class="widget-head">
-									<div class="pull-left">任务列表</div>
+									<div class="pull-left">SC设置</div>
 									<div class="widget-icons pull-right">
 										<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
 									</div>
@@ -238,74 +139,25 @@
 								</div>
 
 								<div class="widget-content">
-									<div class="padd invoice">
-
+									<div class="padd">
 										<div class="row-fluid">
 
 											<div class="span12">
-												<!-- Button to trigger modal -->
-												<table class="table   table-bordered">
-													<thead>
-														<tr>
-															<th>#</th>
-															<th>任务名称</th>
-															<th>别名地址</th>
-															<th>标签ID</th>
-															<th>请求个数</th>
-															<th>状态</th>
-															<th>提交时间</th>
-															<th>更新时间</th>
-															<th>操作</th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:if test="${ list ne null }">
-															<c:forEach var="item" items="${list}">
-																<tr>
-																	<td>${ item.taskId }</td>
-																	<td>${ item.taskName }</td>
-																	<td>${ item.aliasAddress }</td>
-																	<td>${ item.labelId }</td>
-																	<td>${ item.requestNum }</td>
-																	<td>${ item.status }</td>
-																	<td>${ item.gmtCreated }</td>
-																	<td>${ item.gmtUpdated }</td>
-																	<td>
-																		<!-- Button to trigger modal --> <a href="#myModal"
-																		role="button" class="btn btn-success"
-																		data-toggle="modal">查看</a> <!-- Modal -->
-																		<div id="myModal" class="modal hide fade" tabindex="-1"
-																			role="dialog" aria-labelledby="myModalLabel"
-																			aria-hidden="true">
-																			<div class="modal-header">
-																				<button type="button" class="close"
-																					data-dismiss="modal" aria-hidden="true">×</button>
-																				<h3 id="myModalLabel">任务1</h3>
-																			</div>
-																			<div class="modal-body">
-																				<p>One fine body…</p>
-																			</div>
-																			<div class="modal-footer">
-																				<button class="btn" data-dismiss="modal"
-																					aria-hidden="true">Close</button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-															</c:forEach>
-														</c:if>
-													</tbody>
-												</table>
-
-											</div>
-
-										</div>
+												<div class="form-horizontal">
+													<div class="control-group">
+			                                            <label class="control-label" for="webhook_address">webhook地址</label>
+			                                            <div class="controls">
+			                                              <input type="text" class="input-large" id="webhook_address">
+			                                            </div>
+			                                      	</div>
+												</div>		                                      	
+                                      		</div>	
+                                      	</div>
 
 									</div>
 								</div>
 							</div>
-							<!-- task list end -->
-
+							
 						</div>
 
 					</div>

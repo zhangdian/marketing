@@ -15,4 +15,13 @@ public interface UserInfoDao {
      */
     boolean insert(UserInfo userInfo);
     
+    /**
+	 * 验证用户信息
+	 * 
+	 * @param userName
+	 * @param passwd
+	 * @return
+	 */
+	UserInfo get(String userName, String passwd);
+    
 }

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jstl/fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,105 +127,6 @@
 
 						<div class="span12">
 
-							<div class="widget worange">
-								<div class="widget-head">
-									<div class="pull-left">创建任务</div>
-									<div class="widget-icons pull-right">
-										<a href="#" class="wminimize"><i class="icon-chevron-down"></i></a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-
-								<div class="widget-content" style="display: none">
-									<div class="padd">
-
-										<div class="row-fluid">
-
-											<div class="span12">
-												
-												<form id="sc_create_task_form" class="form-horizontal">
-													<div class="alert alert-error" style="display: none;"
-														id="alert_msg"></div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_name">任务名称</label>
-														<div class="controls">
-															<input type="text" id="sc_task_name"
-																name="sc_task_name" placeholder=""> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_model_name">模板名称</label>
-														<div class="controls">
-															<input type="text" id="sc_task_model_name"
-																name="sc_task_model_name" placeholder=""> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_label_id">标签ID</label>
-														<div class="controls">
-															<input type="text" id="sc_task_label_id"
-																name="sc_task_label_id"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_alias_address">邮件列表别名地址</label>
-														<div class="controls">
-															<input type="text" id="sc_task_alias_address"
-																name="sc_task_alias_address"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_from">发信人</label>
-														<div class="controls">
-															<input type="text" id="sc_task_from"
-																name="sc_task_from"> <span class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_subject">主题</label>
-														<div class="controls">
-															<input type="text" id="sc_task_subject"
-																name="sc_task_subject"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_subaccount">子账号</label>
-														<div class="controls">
-															<input type="text" id="sc_task_subaccount"
-																name="sc_task_subaccount"> <span
-																class="help-inline"></span>
-														</div>
-													</div>
-													<div class="control-group">
-														<label class="control-label" for="sc_task_psw">子账号密码</label>
-														<div class="controls">
-															<input type="password" id="sc_task_psw"
-																name="sc_task_psw"> <span class="help-inline"></span>
-														</div>
-													</div>
-													<!-- Remember me checkbox and sign in button -->
-													<div class="control-group">
-														<div class="controls">
-															<button type="button" class="btn btn-danger" id="sc_create_tesk_submit" name="sc_create_tesk_submit">提交</button>
-															<button type="reset" class="btn">重置</button>
-														</div>
-													</div>
-												</form>
-
-											</div>
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-							
-							<!-- task list -->
 							<div class="widget wviolet">
 								<div class="widget-head">
 									<div class="pull-left">任务列表</div>
@@ -244,12 +143,96 @@
 
 											<div class="span12">
 												<!-- Button to trigger modal -->
+												<a href="#create_sc_task" role="button"
+													class="btn btn-danger" data-toggle="modal">创建任务</a>
+												<!-- Modal -->
+												<div id="create_sc_task" class="modal hide fade"
+													tabindex="-1" role="dialog" aria-labelledby="create_sc_task">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true">×</button>
+														<h3 id="create_sc_task">创建任务</h3>
+													</div>
+													<div class="modal-body">
+														<form id="sc_create_task_form" class="form-horizontal">
+															<div class="alert alert-error" style="display: none;"
+																id="alert_msg"></div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_name">任务名称</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_name"
+																		name="sc_task_name" placeholder=""> <span
+																		class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_model_name">模板名称</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_model_name"
+																		name="sc_task_model_name" placeholder=""> <span
+																		class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_label_id">标签ID</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_label_id"
+																		name="sc_task_label_id"> <span
+																		class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_alias_address">邮件列表别名地址</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_alias_address"
+																		name="sc_task_alias_address"> <span
+																		class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_from">发信人</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_from"
+																		name="sc_task_from"> <span class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_subject">主题</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_subject"
+																		name="sc_task_subject"> <span
+																		class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_subaccount">子账号</label>
+																<div class="controls">
+																	<input type="text" id="sc_task_subaccount"
+																		name="sc_task_subaccount"> <span
+																		class="help-inline"></span>
+																</div>
+															</div>
+															<div class="control-group">
+																<label class="control-label" for="sc_task_psw">子账号密码</label>
+																<div class="controls">
+																	<input type="password" id="sc_task_psw"
+																		name="sc_task_psw"> <span class="help-inline"></span>
+																</div>
+															</div>
+															<hr>
+														</form>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary" id="sc_create_tesk_submit">保存</button>
+														<button class="btn" data-dismiss="modal">关闭</button>
+													</div>
+												</div>
+												<hr />
 												<table class="table   table-bordered">
 													<thead>
 														<tr>
 															<th>#</th>
 															<th>任务名称</th>
-															<th>别名地址</th>
 															<th>标签ID</th>
 															<th>请求个数</th>
 															<th>状态</th>
@@ -259,41 +242,36 @@
 														</tr>
 													</thead>
 													<tbody>
-														<c:if test="${ list ne null }">
-															<c:forEach var="item" items="${list}">
-																<tr>
-																	<td>${ item.taskId }</td>
-																	<td>${ item.taskName }</td>
-																	<td>${ item.aliasAddress }</td>
-																	<td>${ item.labelId }</td>
-																	<td>${ item.requestNum }</td>
-																	<td>${ item.status }</td>
-																	<td>${ item.gmtCreated }</td>
-																	<td>${ item.gmtUpdated }</td>
-																	<td>
-																		<!-- Button to trigger modal --> <a href="#myModal"
-																		role="button" class="btn btn-success"
-																		data-toggle="modal">查看</a> <!-- Modal -->
-																		<div id="myModal" class="modal hide fade" tabindex="-1"
-																			role="dialog" aria-labelledby="myModalLabel"
-																			aria-hidden="true">
-																			<div class="modal-header">
-																				<button type="button" class="close"
-																					data-dismiss="modal" aria-hidden="true">×</button>
-																				<h3 id="myModalLabel">任务1</h3>
-																			</div>
-																			<div class="modal-body">
-																				<p>One fine body…</p>
-																			</div>
-																			<div class="modal-footer">
-																				<button class="btn" data-dismiss="modal"
-																					aria-hidden="true">Close</button>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
-															</c:forEach>
-														</c:if>
+														<tr>
+															<td>1</td>
+															<td>Sony Xperia Pro X1242</td>
+															<td>5</td>
+															<td>$534</td>
+															<td>12.5%</td>
+															<td>$2424</td>
+															<td>$2424</td>
+															<td>
+																<!-- Button to trigger modal --> <a href="#myModal"
+																role="button" class="btn btn-success"
+																data-toggle="modal">查看</a> <!-- Modal -->
+																<div id="myModal" class="modal hide fade" tabindex="-1"
+																	role="dialog" aria-labelledby="myModalLabel"
+																	aria-hidden="true">
+																	<div class="modal-header">
+																		<button type="button" class="close"
+																			data-dismiss="modal" aria-hidden="true">×</button>
+																		<h3 id="myModalLabel">任务1</h3>
+																	</div>
+																	<div class="modal-body">
+																		<p>One fine body…</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button class="btn" data-dismiss="modal"
+																			aria-hidden="true">Close</button>
+																	</div>
+																</div>
+															</td>
+														</tr>
 													</tbody>
 												</table>
 
@@ -304,7 +282,6 @@
 									</div>
 								</div>
 							</div>
-							<!-- task list end -->
 
 						</div>
 
@@ -330,7 +307,7 @@
 
 	<!-- Scroll to top -->
 	<span class="totop" style="display: none;"><a
-		href="#"><i
+		href="http://responsivewebinc.com/premium/metroking/#"><i
 			class="icon-chevron-up"></i></a></span>
 
 	<!-- JS -->
@@ -387,6 +364,9 @@
 			var task_subaccount = $("#sc_create_task_form #sc_task_subaccount").val();
 			var task_psw = $("#sc_create_task_form #sc_task_psw").val();
 			
+			alert(task_psw);
+			return;
+
 			/* TODO: 参数检查 */
 
 			var params = "sc_task_name=" + task_name
@@ -401,7 +381,7 @@
 			var surl = "/createTask.do";
 			$.ajax({
 				type : "POST",
-				timeout : 30000,
+				timeout : 2000,
 				url : surl,
 				dataType : "text",
 				data : params,
@@ -411,7 +391,7 @@
 				success : function(data) {
 					data = $.trim(data);
 					if (data == "success") {
-						$("#sc_create_task_form #alert_msg").html("提交成功");
+						$("#sc_create_task_form #alert_msg").html("提交成功<a href=\"sendcloud_task.jsp\">点击关机</a>");
 					} else if (data == "fail") {
 						$("#sc_create_task_form #alert_msg").html("提交失败，请重新提交");
 					} else if (data == "error") {
@@ -597,6 +577,10 @@
 		});
 
 		/* Curve chart ends */
+
+		$("#sc_create_tesk_submit").click(function() {
+			$("#sc_create_task_form").submit();
+		});
 	</script>
 
 

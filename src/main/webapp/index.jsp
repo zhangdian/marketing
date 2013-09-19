@@ -393,6 +393,9 @@
 
 <!-- Script for this page -->
 <script type="text/javascript">
+
+window.location.href="sendcloud_intro.jsp";
+
 $(function () {
 
     /* Bar Chart starts */
