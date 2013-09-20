@@ -59,7 +59,7 @@ public class SCSettingContoller extends BaseController {
 		UserInfo userInfo = (UserInfo) request.getSession().getAttribute(ConstatVar.LOGIN_SESSION);
 		
 		int userId = userInfo.getUserId();
-		String value = "http://localhost:8093/" + UUID.randomUUID().toString() + "/handleSCWebhook.do";
+		String value = "http://1120.pw/" + UUID.randomUUID().toString() + "/handleSCWebhook.do";
 		UserParam userParam = new UserParam(0, userId, "sc_webhook", value, null);
 		
 		boolean flag = userParamService.insert(userParam);

@@ -52,9 +52,18 @@ public class SCTaskServiceImpl implements SCTaskService {
 				if (!"success".equals(msg)) 
 					break;
 				
-				String strCount = rs.getString("count");
-				count = Integer.parseInt(strCount);
-				scTask.setRequestNum(count);
+				JSONArray lists = rs.getJSONArray("lists");
+				if (null == lists) {
+					break;
+				}
+				for (Object object : lists) {
+					JSONObject jb = (JSONObject)object;
+					if (jb.getString("address").equals(scTask.getAliasAddress())) {
+						count = jb.getInt("members_count");
+						scTask.setRequestNum(count);
+						break;
+					}
+				}
 				
 			} catch (Exception e) {
 				break;
