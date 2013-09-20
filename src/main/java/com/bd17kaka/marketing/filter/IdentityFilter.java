@@ -50,6 +50,9 @@ public class IdentityFilter implements Filter {
 				url.equals("register.do") ) {
 			chain.doFilter(req, resp);
 
+		} else if (url.equals("handleSCWebhook.do")) {
+			// 处理webhook
+			chain.doFilter(req, resp);
 		} else if (userInfo == null) {
 			// 用户没有登陆
 			resp.sendRedirect("login.jsp");

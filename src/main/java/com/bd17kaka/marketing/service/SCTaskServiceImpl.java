@@ -100,5 +100,17 @@ public class SCTaskServiceImpl implements SCTaskService {
 
 		return scTaskDao.listByUserId(userId);
 	}
+
+	@Override
+	public SCTask getByUserIdAndMailListTaskId(int userId, int mailListTaskId) {
+	
+		return scTaskDao.getByUserIdAndMailListTaskId(userId, mailListTaskId);
+	}
+
+	@Override
+	public boolean update(SCTask scTask) {
+		
+		return scTaskDao.update(scTask);
+	}
   
 }

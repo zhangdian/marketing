@@ -77,4 +77,53 @@ public class SCTaskDaoImpl extends SpringJDBCDaoSupport implements
 		return listSCTask;
 	}
 
+	@Override
+	public SCTask getByUserIdAndMailListTaskId(int userId, int mailListTaskId) {
+		String sql = "select * from " + TableName + " where user_id=? and mail_list_task_id=?";
+		Object[] args = new Object[]{userId, mailListTaskId};
+		int[] argTypes = new int[]{Types.INTEGER, Types.INTEGER};
+		List<SCTask> listSCTask = this.getJdbcTemplate().query(sql, args, argTypes, ParameterizedBeanPropertyRowMapper.newInstance(SCTask.class));
+		if (null == listSCTask || 0 == listSCTask.size()) 
+			return null;
+		else
+			return listSCTask.get(0);
+	}
+
+	@Override
+	public boolean update(SCTask scTask) {
+		String sql = "update "
+				+ TableName
+				+ " set status=?,gmt_updated=now(),delivery_num=?,invalid_num=?,reported_spam_num=?,click_num=?,open_num=?,unsubscribe_num=?,spam_num=?,softbounce_num=?,email_id=?"
+				+ " where user_id=? and mail_list_task_id=?";
+		Object[] args = new Object[] {
+				scTask.getStatus(),
+				scTask.getDeliveryNum(),
+				scTask.getInvalidNum(),
+				scTask.getReportedSpamNum(),
+				scTask.getClickNum(),
+				scTask.getOpenNum(),
+				scTask.getUnsubscribeNum(),
+				scTask.getSpamNum(),
+				scTask.getSoftbounceNum(),
+				scTask.getEmailId(),
+				scTask.getUserId(),
+				scTask.getMailListTaskId()
+				};
+		int[] argTypes = new int[] { 
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.INTEGER,
+				Types.VARCHAR,
+				Types.INTEGER,
+				Types.INTEGER
+		};
+		return 0 < this.getJdbcTemplate().update(sql, args, argTypes);
+	}
+
 }

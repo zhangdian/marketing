@@ -24,4 +24,18 @@ public interface SCTaskDao {
      */
     List<SCTask> listByUserId(int userId);
 
+    /**
+     * 根据用户ID和邮件列表任务ID获取SC_TASK对象
+     * @param userId
+     * @param mailListTaskId
+     * @return
+     */
+    SCTask getByUserIdAndMailListTaskId(int userId, int mailListTaskId);
+    
+    /**
+     * 更新SC任务
+     * @param scTask
+     * @return
+     */
+    boolean update(SCTask scTask);
 }

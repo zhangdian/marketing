@@ -144,10 +144,30 @@
 
 											<div class="span12">
 												<div class="form-horizontal">
+													<!-- sc_webhook_address -->
 													<div class="control-group">
-			                                            <label class="control-label" for="webhook_address">webhook地址</label>
+			                                            <label class="control-label" for="sc_webhook_address">webhook地址</label>
 			                                            <div class="controls">
-			                                              <input type="text" class="input-large" id="webhook_address">
+			                                              <input type="text" class="input-large" id="sc_webhook_address" value="${ sc_webhook }" readonly="readonly">
+			                                              <c:if test="${ sc_webhook eq null }">
+				                                              <button class="btn btn-danger" type="button" id="create_sc_webhook">创建</button>
+			                                              </c:if>
+			                                              <c:if test="${ sc_webhook ne null }">
+			                                              	  <!-- <button class="btn btn-danger" type="button" id="copy_to_clipboard">复制到剪贴板</button> -->
+			                                              </c:if>
+			                                            </div>
+			                                      	</div>
+			                                      	<!-- app_key -->
+			                                      	<div class="control-group">
+			                                            <label class="control-label" for="sc_webhook_address">app key</label>
+			                                            <div class="controls">
+			                                              <c:if test="${ sc_app_key eq null }">
+				                                              <input type="text" class="input-large" id="sc_app_key" value="">
+				                                              <button class="btn btn-danger" type="button" id="save_sc_app_key">保存</button>
+			                                              </c:if>
+			                                              <c:if test="${ sc_app_key ne null }">
+			                                              	  <input type="text" class="input-large" id="sc_app_key" value="${ sc_app_key }" readonly="readonly">
+			                                              </c:if>
 			                                            </div>
 			                                      	</div>
 												</div>		                                      	
@@ -225,61 +245,76 @@
 
 	<!-- Script for this page -->
 	<script type="text/javascript">
-		$("#sc_create_tesk_submit").click(function() {
-
-			$("#sc_create_task_form #alert_msg").html("提交中，请等待");
-			$("#sc_create_task_form #alert_msg").show();
-			
-			var task_name = $("#sc_create_task_form #sc_task_name").val();
-			var task_model_name = $("#sc_create_task_form #sc_task_model_name").val();
-			var task_label_id = $("#sc_create_task_form #sc_task_label_id").val();
-			var task_alias_address = $("#sc_create_task_form #sc_task_alias_address").val();
-			var task_from = $("#sc_create_task_form #sc_task_from").val();
-			var task_subject = $("#sc_create_task_form #sc_task_subject").val();
-			var task_subaccount = $("#sc_create_task_form #sc_task_subaccount").val();
-			var task_psw = $("#sc_create_task_form #sc_task_psw").val();
-			
-			/* TODO: 参数检查 */
-
-			var params = "sc_task_name=" + task_name
-					+ "&sc_task_model_name=" + task_model_name
-					+ "&sc_task_label_id=" + task_label_id
-					+ "&sc_task_alias_address="
-					+ task_alias_address + "&sc_task_from="
-					+ task_from + "&sc_task_subject="
-					+ task_subject + "&sc_task_subaccount="
-					+ task_subaccount + "&sc_task_psw="
-					+ task_psw
-			var surl = "/createTask.do";
-			$.ajax({
-				type : "POST",
-				timeout : 30000,
-				url : surl,
-				dataType : "text",
-				data : params,
-				cache : false,
-				async : true,
-				global : false,
-				success : function(data) {
-					data = $.trim(data);
-					if (data == "success") {
-						$("#sc_create_task_form #alert_msg").html("提交成功");
-					} else if (data == "fail") {
-						$("#sc_create_task_form #alert_msg").html("提交失败，请重新提交");
-					} else if (data == "error") {
-						$("#sc_create_task_form #alert_msg").html("参数错误，请检查参数后提交");
-					}
-					$("#sc_create_task_form #alert_msg").show();
-
-				},
-				error : function(t, v) {
-					$("#sc_create_task_form #alert_msg").html("系统错误" + t + v);
-					$("#sc_create_task_form #alert_msg").show();
+		
+	$("#create_sc_webhook").click(function() {
+		
+		var surl = "/createSCWebhook.do";
+		$.ajax({
+			type : "POST",
+			timeout : 2000,
+			url : surl,
+			dataType : "text",
+			data : "",	
+			cache : false,
+			async : true,
+			global : false,
+			success : function(data) {
+				data = $.trim(data);
+				if (data == "error") {
+					$("#sc_webhook_address").val("创建失败，请重新创建");
+				} else {
+					window.location.reload();
 				}
-			});
 
+			},
+			error : function(t, v) {
+				$("#sc_webhook_address").val("系统错误");
+			}
 		});
+		
+	});
+	
+	$("#save_sc_app_key").click(function() {
+		
+		var sc_app_key = $("#sc_app_key").val();
+		
+		/*TODO: 参数检查*/
+		
+		var params = "sc_app_key="+sc_app_key;
+		var surl = "/saveSCAppKey.do";
+		$.ajax({
+			type : "POST",
+			timeout : 2000,
+			url : surl,
+			dataType : "text",
+			data : params,	
+			cache : false,
+			async : true,
+			global : false,
+			success : function(data) {
+				data = $.trim(data);
+				if (data == "error") {
+					$("#sc_app_key").val("参数错误，请检查参数后提交");
+				} else if (data == "fail") {
+					$("#sc_app_key").val("保存失败，请重新保存");
+				} else {
+					window.location.reload();
+				}
 
+			},
+			error : function(t, v) {
+				$("#sc_app_key").val("系统错误");
+			}
+		});
+		
+	});
+	
+	$("#copy_to_clipboard").click(function() {
+		var val = $("#sc_webhook_address").val();
+		alert(val);
+		window.clipboardData.setData('text', val); 
+	});
+	
 		$(function() {
 
 			/* Bar Chart starts */

@@ -50,7 +50,7 @@ public class UserContoller extends BaseController {
 		
 		// 保存用户信息
 		UserInfo userInfo = new UserInfo(0, userName, passwd, email, 0, 0, Calendar.getInstance().getTime()); 
-		boolean rs = userService.insert(userInfo);
+		boolean rs = userService.userRegister(userInfo);
 		if (rs)	writePlain(request, response, "success");
 		else	writePlain(request, response, "fail");
 		

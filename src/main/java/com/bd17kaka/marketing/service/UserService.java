@@ -13,7 +13,7 @@ public interface UserService {
      * @param userInfo
      * @return
      */
-    boolean insert(UserInfo userInfo);
+    boolean userRegister(UserInfo userInfo);
     
     /**
 	 * 用户登录
