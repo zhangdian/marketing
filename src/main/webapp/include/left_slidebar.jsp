@@ -7,7 +7,7 @@ String selected_item = request.getParameter("selected_item");
 %>
 <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-dropdown"><a href="http://responsivewebinc.com/premium/metroking/#">Navigation</a></div>
+        <div class="sidebar-dropdown"><a href="#">Navigation</a></div>
 
         <div class="sidebar-inner">
 

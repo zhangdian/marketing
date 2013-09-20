@@ -23,9 +23,11 @@ public class SCWebhookHandlerServiceImpl implements SCWebhookHandlerService {
 		int userId = scWebhook.getUserId();
 		long mailListTaskId = scWebhook.getMailListTaskId();
 		int labelId = scWebhook.getLabelId();
+		int recipientSize = scWebhook.getRecipientSize();
 		String messageId = scWebhook.getMessageId(); // 请求返回的email_id
 		
 		if (0 == mailListTaskId ||
+				0 == recipientSize ||
 				"".equals(messageId)) {
 			return;
 		}
@@ -38,6 +40,7 @@ public class SCWebhookHandlerServiceImpl implements SCWebhookHandlerService {
 		
 		/** 更新sc_task的状态 */
 		scTask.setEmailId(messageId);
+		scTask.setRequestNum(recipientSize);
 		scTaskService.update(scTask);
 	}
 
