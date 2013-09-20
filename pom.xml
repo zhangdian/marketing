@@ -3,7 +3,7 @@
 	<modelVersion>0.0.1</modelVersion>
 	<groupId>com.bd17kaka.marketing</groupId>
 	<artifactId>marketing</artifactId>
-	<version>0.0.1</version>
+	<version>4.0.0</version>
 	<packaging>war</packaging>
 
 	<build>
