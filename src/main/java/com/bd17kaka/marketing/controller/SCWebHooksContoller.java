@@ -152,6 +152,10 @@ public class SCWebHooksContoller extends BaseController {
 			scWebhookHandlerService.handleRequest(scWebhook);
 		} else if ("deliver".equals(event)) {
 			scWebhookHandlerService.handleDelivery(scWebhook);
+		} else if ("open".equals(event)) {
+			scWebhookHandlerService.handleOpen(scWebhook);
+		} else if ("click".equals(event)) {
+			scWebhookHandlerService.handleClick(scWebhook);
 		}
 		
 	}

@@ -247,12 +247,12 @@
 												<table class="table   table-bordered">
 													<thead>
 														<tr>
-															<th>#</th>
+															<th>ID</th>
 															<th>任务名称</th>
 															<th>别名地址</th>
 															<th>标签ID</th>
-															<th>请求个数</th>
-															<th>状态</th>
+															<th>请求</th>
+															<th>发送</th>
 															<th>提交时间</th>
 															<th>更新时间</th>
 															<th>操作</th>
@@ -267,27 +267,53 @@
 																	<td>${ item.aliasAddress }</td>
 																	<td>${ item.labelId }</td>
 																	<td>${ item.requestNum }</td>
-																	<td>${ item.status }</td>
+																	<td>${ item.deliveryNum }</td>
 																	<td>${ item.gmtCreated }</td>
 																	<td>${ item.gmtUpdated }</td>
 																	<td>
-																		<!-- Button to trigger modal --> <a href="#myModal"
-																		role="button" class="btn btn-success"
-																		data-toggle="modal">查看</a> <!-- Modal -->
-																		<div id="myModal" class="modal hide fade" tabindex="-1"
-																			role="dialog" aria-labelledby="myModalLabel"
-																			aria-hidden="true">
+																		<!-- Button to trigger modal --> 
+																		<a href="#myModal_${ item.taskId }" role="button" class="btn btn-success" data-toggle="modal">查看</a> 
+																		<!-- Modal -->
+																		<div id="myModal_${ item.taskId }" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 1150px; margin-left: -575px">
 																			<div class="modal-header">
 																				<button type="button" class="close"
 																					data-dismiss="modal" aria-hidden="true">×</button>
-																				<h3 id="myModalLabel">任务1</h3>
+																				<h3 id="myModalLabel">${ item.taskName }</h3>
 																			</div>
 																			<div class="modal-body">
-																				<p>One fine body…</p>
+																				<div class="widget-content" style="display: block;">
+																                  <div class="padd">
+																                    <!-- Barchart. jQuery Flot plugin used. -->
+																                    <div id="bar-chart" style="padding: 0px; position: relative;">
+																                    	<canvas class="base" width="1052" height="283"></canvas>
+																                    	<canvas class="overlay" width="1052" height="283" style="position: absolute; left: 0px; top: 0px;"></canvas>
+																                    	<div class="tickLabels" style="font-size:smaller">
+																                    		<div class="xAxis x1Axis" style="color:#777">
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:-46px;top:260px;width:131px"></div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:121px;top:260px;width:131px">请求</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:288px;top:260px;width:131px">发送</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:455px;top:260px;width:131px">无效</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:622px;top:260px;width:131px">打开</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:789px;top:260px;width:131px">点击</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:956px;top:260px;width:131px">取消订阅</div>
+																	                    	</div>
+																	                    	<div class="yAxis y1Axis" style="color:#777">
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:244px;right:1038px;width:14px">0</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:202px;right:1038px;width:14px">10</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:160px;right:1038px;width:14px">20</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:118px;right:1038px;width:14px">30</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:76px;right:1038px;width:14px">40</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:34px;right:1038px;width:14px">50</div>
+																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:-7px;right:1038px;width:14px">60</div>
+																	                    	</div>
+																                    	</div>
+																                    </div>
+																
+																                  </div>
+																                </div>
 																			</div>
 																			<div class="modal-footer">
-																				<button class="btn" data-dismiss="modal"
-																					aria-hidden="true">Close</button>
+																				<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 																			</div>
 																		</div>
 																	</td>

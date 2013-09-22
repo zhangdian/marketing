@@ -68,4 +68,51 @@ public class SCWebhookHandlerServiceImpl implements SCWebhookHandlerService {
 		
 	}
 
+	@Override
+	public void handleOpen(SCWebhook scWebhook) {
+
+		/** 获取需要的参数 */
+		int userId = scWebhook.getUserId();
+		long mailListTaskId = scWebhook.getMailListTaskId();
+		
+		if (0 == mailListTaskId) {
+			return;
+		}
+		
+		/** 获取sc_task对象 */
+		SCTask scTask = scTaskService.getByUserIdAndMailListTaskId(userId, Integer.parseInt(mailListTaskId+""));
+		if (null == scTask) {
+			return;
+		}
+		
+		/** 更新sc_task的状态 */
+		int openNum = scTask.getOpenNum();
+		scTask.setOpenNum(openNum + 1);
+		scTaskService.update(scTask);
+		
+	}
+
+	@Override
+	public void handleClick(SCWebhook scWebhook) {
+
+		/** 获取需要的参数 */
+		int userId = scWebhook.getUserId();
+		long mailListTaskId = scWebhook.getMailListTaskId();
+		
+		if (0 == mailListTaskId) {
+			return;
+		}
+		
+		/** 获取sc_task对象 */
+		SCTask scTask = scTaskService.getByUserIdAndMailListTaskId(userId, Integer.parseInt(mailListTaskId+""));
+		if (null == scTask) {
+			return;
+		}
+		
+		/** 更新sc_task的状态 */
+		int clickNum = scTask.getClickNum();
+		scTask.setClickNum(clickNum + 1);
+		scTaskService.update(scTask);
+	}
+
 }
