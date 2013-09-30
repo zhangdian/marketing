@@ -103,7 +103,7 @@
 			var surl = "/login.do";
 			$.ajax({
 				type : "POST",
-				timeout : 2000,
+				timeout : 60000,
 				url : surl,
 				dataType : "text",
 				data : params,	
