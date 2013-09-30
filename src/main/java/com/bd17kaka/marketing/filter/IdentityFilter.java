@@ -11,8 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.bd17kaka.marketing.constant.ConstatVar;
 import com.bd17kaka.marketing.po.UserInfo;
@@ -23,16 +23,15 @@ import com.bd17kaka.marketing.po.UserInfo;
  */
 public class IdentityFilter implements Filter {
 
-	private static final Logger Log = LoggerFactory
-			.getLogger(IdentityFilter.class);
+	private static final Log log = LogFactory.getLog(IdentityFilter.class);
 
 	public void destroy() {
-		Log.info(" IdentityFilter destroy");
+		log.info(" IdentityFilter destroy");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		Log.debug("start do Filter.....");
+		log.debug("start do Filter.....");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 
@@ -63,7 +62,7 @@ public class IdentityFilter implements Filter {
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		Log.info("IdentityFilter init");
+		log.info("IdentityFilter init");
 	}
 
 }

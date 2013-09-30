@@ -24,7 +24,7 @@ import com.bd17kaka.marketing.service.UserParamService;
 public class SCSettingContoller extends BaseController {
 
 	@Resource(name = "userParamService")
-	 private UserParamService userParamService;
+	private UserParamService userParamService;
 	  
 	@RequestMapping("/initSCSetting.do")
 	public String initSCSetting(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {
