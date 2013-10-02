@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="">
+	<meta property="qc:admins" content="43173533420607" />
 
 	<!-- Stylesheets -->
 	<link href="./css/bootstrap.css" rel="stylesheet">
