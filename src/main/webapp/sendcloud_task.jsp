@@ -272,9 +272,10 @@
 																	<td>${ item.gmtUpdated }</td>
 																	<td>
 																		<!-- Button to trigger modal --> 
-																		<a href="#myModal_${ item.taskId }" role="button" class="btn btn-success" data-toggle="modal">查看</a> 
+																		<a href="#myModal_${ item.taskId }" role="button" class="btn btn-success" data-toggle="modal" 
+																			onclick="fillTaskContent(${ item.taskId }, ${ item.requestNum }, ${ item.deliveryNum }, ${ item.invalidNum }, ${ item.reportedSpamNum }, ${ item.clickNum }, ${ item.openNum }, ${ item.unsubscribeNum }, ${ item.spamNum }, ${ item.softbounceNum });">查看</a> 
 																		<!-- Modal -->
-																		<div id="myModal_${ item.taskId }" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 1150px; margin-left: -575px">
+																		<div id="myModal_${ item.taskId }" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 720px; margin-left: -360px">
 																			<div class="modal-header">
 																				<button type="button" class="close"
 																					data-dismiss="modal" aria-hidden="true">×</button>
@@ -283,30 +284,9 @@
 																			<div class="modal-body">
 																				<div class="widget-content" style="display: block;">
 																                  <div class="padd">
-																                    <!-- Barchart. jQuery Flot plugin used. -->
-																                    <div id="bar-chart" style="padding: 0px; position: relative;">
-																                    	<canvas class="base" width="1052" height="283"></canvas>
-																                    	<canvas class="overlay" width="1052" height="283" style="position: absolute; left: 0px; top: 0px;"></canvas>
-																                    	<div class="tickLabels" style="font-size:smaller">
-																                    		<div class="xAxis x1Axis" style="color:#777">
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:-46px;top:260px;width:131px"></div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:121px;top:260px;width:131px">请求</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:288px;top:260px;width:131px">发送</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:455px;top:260px;width:131px">无效</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:622px;top:260px;width:131px">打开</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:789px;top:260px;width:131px">点击</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:center;left:956px;top:260px;width:131px">取消订阅</div>
-																	                    	</div>
-																	                    	<div class="yAxis y1Axis" style="color:#777">
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:244px;right:1038px;width:14px">0</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:202px;right:1038px;width:14px">10</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:160px;right:1038px;width:14px">20</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:118px;right:1038px;width:14px">30</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:76px;right:1038px;width:14px">40</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:34px;right:1038px;width:14px">50</div>
-																	                    		<div class="tickLabel" style="position:absolute;text-align:right;top:-7px;right:1038px;width:14px">60</div>
-																	                    	</div>
-																                    	</div>
+																                    
+																                    <div id="container_${ item.taskId }" style="min-width: 600px; height: 400px; margin: 0 auto; padding-left: 40px;">
+																                    	
 																                    </div>
 																
 																                  </div>
@@ -396,9 +376,15 @@
 	<!-- Custom codes -->
 	<script src="./js/charts.js"></script>
 	<!-- Custom chart codes -->
+	
+	<!-- highchart -->
+	<script src="./js/highcharts.js"></script>
+	<script src="./js/exporting.js"></script>
 
 	<!-- Script for this page -->
 	<script type="text/javascript">
+	
+		/* 创建任务  start */
 		$("#sc_create_tesk_submit").click(function() {
 
 			$("#sc_create_task_form #alert_msg").html("提交中，请等待");
@@ -453,176 +439,76 @@
 			});
 
 		});
+		/* 创建任务  end */ 
+		
+		/* 填充task内容弹出框中的信息 start */
+		function fillTaskContent (task_id, request, delivery, invalid, report_spam, click, open, unsunscribe, spam, bounce) {
+			
+			var real_data = [];
+			real_data.push(request);
+			real_data.push(delivery);
+			real_data.push(invalid);
+			real_data.push(report_spam);
+			real_data.push(click);
+			real_data.push(open);
+			real_data.push(unsunscribe);
+			real_data.push(spam);
+			real_data.push(bounce);
+			$('#container_' + task_id).highcharts({
+	            chart: {
+	                type: 'column'
+	            },
+	            title: {
+	                text: '投递回应'
+	            },
+	            subtitle: {
+	                text: '来源: send.sohu.com'
+	            },
+	            xAxis: {
+	                categories: [
+	                    '请求',
+	                    '发送',
+	                    '无效',
+	                    '垃圾举报',
+	                    '点击',
+	                    '打开',
+	                    '取消订阅',
+	                    '垃圾',
+	                    '退信'
+	                ]
+	            },
+	            yAxis: {
+	                min: 0,
+	                title: {
+	                    text: '数量 (个)'
+	                }
+	            },
+	            tooltip: {
+	                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	                    '<td style="padding:0"><b>{point.y:.1f} 个</b></td></tr>',
+	                footerFormat: '</table>',
+	                shared: true,
+	                useHTML: true
+	            },
+	            plotOptions: {
+	                column: {
+	                    pointPadding: 0.2,
+	                    borderWidth: 0
+	                }
+	            },
+	            series: [{
+	                name: '数量',
+	                data: real_data
+	    
+	            }]
+	        });
+			
+		}
+		
+		/* 填充task内容弹出框中的信息 end */
 
-		$(function() {
-
-			/* Bar Chart starts */
-
-			var d1 = [];
-			for ( var i = 0; i <= 30; i += 1)
-				d1.push([ i, parseInt(Math.random() * 30) ]);
-
-			var d2 = [];
-			for ( var i = 0; i <= 30; i += 1)
-				d2.push([ i, parseInt(Math.random() * 30) ]);
-
-			var stack = 0, bars = true, lines = false, steps = false;
-
-			function plotWithOptions() {
-				$.plot($("#bar-chart"), [ d1, d2 ], {
-					series : {
-						stack : stack,
-						lines : {
-							show : lines,
-							fill : true,
-							steps : steps
-						},
-						bars : {
-							show : bars,
-							barWidth : 0.8
-						}
-					},
-					grid : {
-						borderWidth : 0,
-						hoverable : true,
-						color : "#777"
-					},
-					colors : [ "#52b9e9", "#0aa4eb" ],
-					bars : {
-						show : true,
-						lineWidth : 0,
-						fill : true,
-						fillColor : {
-							colors : [ {
-								opacity : 0.9
-							}, {
-								opacity : 0.8
-							} ]
-						}
-					}
-				});
-			}
-
-			plotWithOptions();
-
-			$(".stackControls input").click(function(e) {
-				e.preventDefault();
-				stack = $(this).val() == "With stacking" ? true : null;
-				plotWithOptions();
-			});
-			$(".graphControls input").click(function(e) {
-				e.preventDefault();
-				bars = $(this).val().indexOf("Bars") != -1;
-				lines = $(this).val().indexOf("Lines") != -1;
-				steps = $(this).val().indexOf("steps") != -1;
-				plotWithOptions();
-			});
-
-			/* Bar chart ends */
-
-		});
-
-		/* Curve chart starts */
-
-		$(function() {
-			var sin = [], cos = [];
-			for ( var i = 0; i < 14; i += 0.5) {
-				sin.push([ i, Math.sin(i) ]);
-				cos.push([ i, Math.cos(i) ]);
-			}
-
-			var plot = $.plot($("#curve-chart"), [ {
-				data : sin,
-				label : "sin(x)"
-			}, {
-				data : cos,
-				label : "cos(x)"
-			} ], {
-				series : {
-					lines : {
-						show : true,
-						fill : true,
-						fillColor : {
-							colors : [ {
-								opacity : 0.05
-							}, {
-								opacity : 0.01
-							} ]
-						}
-					},
-					points : {
-						show : true
-					}
-				},
-				grid : {
-					hoverable : true,
-					clickable : true,
-					borderWidth : 0
-				},
-				yaxis : {
-					min : -1.2,
-					max : 1.2
-				},
-				colors : [ "#fa3031", "#43c83c" ]
-			});
-
-			function showTooltip(x, y, contents) {
-				$('<div id="tooltip">' + contents + '</div>').css({
-					position : 'absolute',
-					display : 'none',
-					top : y + 5,
-					width : 100,
-					left : x + 5,
-					border : '1px solid #000',
-					padding : '2px 8px',
-					color : '#ccc',
-					'background-color' : '#000',
-					opacity : 0.9
-				}).appendTo("body").fadeIn(200);
-			}
-
-			var previousPoint = null;
-			$("#curve-chart")
-					.bind(
-							"plothover",
-							function(event, pos, item) {
-								$("#x").text(pos.x.toFixed(2));
-								$("#y").text(pos.y.toFixed(2));
-
-								if (item) {
-									if (previousPoint != item.dataIndex) {
-										previousPoint = item.dataIndex;
-
-										$("#tooltip").remove();
-										var x = item.datapoint[0].toFixed(2), y = item.datapoint[1]
-												.toFixed(2);
-
-										showTooltip(item.pageX, item.pageY,
-												item.series.label + " of " + x
-														+ " = " + y);
-									}
-								} else {
-									$("#tooltip").remove();
-									previousPoint = null;
-								}
-							});
-
-			$("#curve-chart")
-					.bind(
-							"plotclick",
-							function(event, pos, item) {
-								if (item) {
-									$("#clickdata").text(
-											"You clicked point "
-													+ item.dataIndex + " in "
-													+ item.series.label + ".");
-									plot.highlight(item.series, item.datapoint);
-								}
-							});
-
-		});
-
-		/* Curve chart ends */
+		
 	</script>
 
 

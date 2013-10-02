@@ -105,7 +105,7 @@ public class SCWebHooksContoller extends BaseController {
 		}
 		try {
 			boolean flag = verify(appkey, token, timestamp, signature);
-			flag = true; // TODO: 应该删除
+			flag = true; // TODO: 应该删掉
 			if (!flag) {
 				return;
 			}
@@ -156,6 +156,18 @@ public class SCWebHooksContoller extends BaseController {
 			scWebhookHandlerService.handleOpen(scWebhook);
 		} else if ("click".equals(event)) {
 			scWebhookHandlerService.handleClick(scWebhook);
+		} else if ("invalid".equals(event)) {
+			scWebhookHandlerService.handleInvalid(scWebhook);
+		} else if ("report_spam".equals(event)) {
+			scWebhookHandlerService.handleReportSpam(scWebhook);
+		} else if ("unsubscribe".equals(event)) {
+			scWebhookHandlerService.handleUnsubscribe(scWebhook);
+		} else if ("spam".equals(event)) {
+			scWebhookHandlerService.handleSpam(scWebhook);
+		} else if ("bounce".equals(event)) {
+			scWebhookHandlerService.handleBounce(scWebhook);
+		} else if ("soft_bounce".equals(event)) {
+			scWebhookHandlerService.handleBounce(scWebhook);
 		}
 		
 	}

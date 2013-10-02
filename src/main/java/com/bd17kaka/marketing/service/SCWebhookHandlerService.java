@@ -31,4 +31,34 @@ public interface SCWebhookHandlerService {
 	 * @param scWebhook
 	 */
 	void handleClick(SCWebhook scWebhook);
+	
+	/**
+	 * 处理无效邮件事件
+	 * @param scWebhook
+	 */
+	void handleInvalid(SCWebhook scWebhook);
+	
+	/**
+	 * 处理垃圾举报事件
+	 * @param scWebhook
+	 */
+	void handleReportSpam(SCWebhook scWebhook);
+	
+	/**
+	 * 处理取消订阅事件
+	 * @param scWebhook
+	 */
+	void handleUnsubscribe(SCWebhook scWebhook);
+	
+	/**
+	 * 处理垃圾邮件事件
+	 * @param scWebhook
+	 */
+	void handleSpam(SCWebhook scWebhook);
+
+	/**
+	 * 处理退信
+	 * @param scWebhook
+	 */
+	void handleBounce(SCWebhook scWebhook);
 }
