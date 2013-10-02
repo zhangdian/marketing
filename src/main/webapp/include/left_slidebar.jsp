@@ -28,6 +28,21 @@ String selected_item = request.getParameter("selected_item");
             <!-- Use the class nred, ngreen, nblue, nlightblue, nviolet or norange to add background color. You need to use this in <li> tag. -->
 
 			<!-- Menu with sub menu -->
+            <li class="has_submenu ngreen<%if(selected_item.startsWith("local")) {%> current open<% }%>">
+              <a href="#">
+                <!-- Menu name with icon -->
+                <i class="icon-th"></i> 本站资料
+                <!-- Icon for dropdown -->
+                <span class="pull-right"><i class="icon-angle-right"></i></span>
+              </a>
+
+              <ul>
+                <li><a href="./local_email_list.jsp">邮件地址列表</a></li>
+                <li><a href="#">TODO</a></li>
+              </ul>
+            </li>
+
+			<!-- Menu with sub menu -->
             <li class="has_submenu nred<%if(selected_item.startsWith("sendcloud")) {%> current open<% }%>">
               <a href="#">
                 <!-- Menu name with icon -->

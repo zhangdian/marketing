@@ -25,6 +25,11 @@ UserInfo userInfo = (UserInfo) request.getSession().getAttribute(ConstatVar.LOGI
 
         <!-- Links -->
         <ul class="nav pull-right">
+          <li class="dropdown pull-right">
+          	<a data-toggle="dropdown" class="dropdown-toggle" href="gotoQQVerify.do" target="_blank">
+          		<img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/bt_white_24X24.png" alt="bt_white_24X24.png">
+          	</a>
+          </li>
           <li class="dropdown pull-right">            
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <img src="./img/user.jpg" alt="" class="nav-user-pic"> Admin <b class="caret"></b>              
