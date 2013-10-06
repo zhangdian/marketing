@@ -126,11 +126,65 @@
 
 					<div class="row-fluid">
 
-						<div class="span6">
+						<div class="span12">
 
 							<div class="widget worange">
 								<div class="widget-head">
-									<div class="pull-left">SC设置</div>
+									<div class="pull-left">创建邮件列表</div>
+									<div class="widget-icons pull-right">
+										<a href="#" class="wminimize"><i class="icon-chevron-down"></i></a>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="widget-content" style="display: none">
+									<div class="padd">
+
+										<div class="row-fluid">
+
+											<div class="span12">
+												
+												<form id="local_create_email_list_form" class="form-horizontal">
+													<div class="alert alert-error" style="display: none"
+														id="alert_msg"></div>
+													<div class="control-group">
+														<label class="control-label" for="local_email_list_name">邮件列表名称</label>
+														<div class="controls">
+															<input type="text" id="local_email_list_name"
+																name="local_email_list_name" placeholder=""> <span
+																class="help-inline"></span>
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label" for="local_email_list_type">邮件列表类型</label>
+														<div class="controls">
+															<select id="local_email_list_type" name="local_email_list_type">
+																<option value="0">默认</option>
+															</select>
+															<span class="help-inline"></span>
+														</div>
+													</div>
+													<!-- Remember me checkbox and sign in button -->
+													<div class="control-group">
+														<div class="controls">
+															<button type="button" class="btn btn-danger" id="local_create_email_list_submit" name="local_create_email_list_submit">创建</button>
+															<button type="reset" class="btn">重置</button>
+														</div>
+													</div>
+												</form>
+
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+							
+							<!-- 邮件地址列表 start -->
+							<div class="widget wviolet">
+								<div class="widget-head">
+									<div class="pull-left">任务列表</div>
 									<div class="widget-icons pull-right">
 										<a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
 									</div>
@@ -138,44 +192,45 @@
 								</div>
 
 								<div class="widget-content">
-									<div class="padd">
+									<div class="padd invoice">
+
 										<div class="row-fluid">
 
 											<div class="span12">
-												<div class="form-horizontal">
-													<!-- sc_webhook_address -->
-													<div class="control-group">
-			                                            <label class="control-label" for="sc_webhook_address">webhook地址</label>
-			                                            <div class="controls">
-			                                              <input type="text" class="input-large" id="sc_webhook_address" value="${ sc_webhook }" readonly="readonly">
-			                                              <c:if test="${ sc_webhook eq null }">
-				                                              <button class="btn btn-danger" type="button" id="create_sc_webhook">创建</button>
-			                                              </c:if>
-			                                              <c:if test="${ sc_webhook ne null }">
-			                                              	  <!-- <button class="btn btn-danger" type="button" id="copy_to_clipboard">复制到剪贴板</button> -->
-			                                              </c:if>
-			                                            </div>
-			                                      	</div>
-			                                      	<!-- app_key -->
-			                                      	<div class="control-group">
-			                                            <label class="control-label" for="sc_webhook_address">app key</label>
-			                                            <div class="controls">
-			                                              <c:if test="${ sc_app_key eq null }">
-				                                              <input type="text" class="input-large" id="sc_app_key" value="">
-				                                              <button class="btn btn-danger" type="button" id="save_sc_app_key">保存</button>
-			                                              </c:if>
-			                                              <c:if test="${ sc_app_key ne null }">
-			                                              	  <input type="text" class="input-large" id="sc_app_key" value="${ sc_app_key }" readonly="readonly">
-			                                              </c:if>
-			                                            </div>
-			                                      	</div>
-												</div>		                                      	
-                                      		</div>	
-                                      	</div>
+												<!-- Button to trigger modal -->
+												<table class="table   table-bordered">
+													<thead>
+														<tr>
+															<th>名称</th>
+															<th>地址数量</th>
+															<th>创建时间</th>
+															<th>操作</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:if test="${ list ne null }">
+															<c:forEach var="item" items="${list}">
+																<tr>
+																	<td>${ item.name }</td>
+																	<td>${ item.count }</td>
+																	<td>${ item.gmtCreated }</td>
+																	<td>
+																		<a href="#myModal" class="btn btn-info" data-toggle="modal">添加</a>					
+																	</td>
+																</tr>
+															</c:forEach>
+														</c:if>
+													</tbody>
+												</table>
+
+											</div>
+
+										</div>
 
 									</div>
 								</div>
 							</div>
+							<!-- 邮件地址列表  end -->
 							
 						</div>
 
@@ -194,10 +249,31 @@
 	</div>
 	<!-- Content ends -->
 
+	<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">添加邮件地址</h4>
+				</div>
+				<div class="modal-body">
+					<div class="widget-content">
+						<!-- Widget content -->
+						<p>你可以从以下方式添加邮件地址：</p>
+						<p>
+							<a target="_blank" href="gotoQQVerify.do"><img src="./img/qq_white_24X24.png" alt="qq_white_24X24.png"></a>
+						</p>
 
-	<!-- Notification box starts -->
-
-	<!-- Notification box ends -->
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						aria-hidden="true">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Scroll to top -->
 	<span class="totop" style="display: none;"><a
@@ -245,45 +321,17 @@
 	<!-- Script for this page -->
 	<script type="text/javascript">
 		
-	$("#create_sc_webhook").click(function() {
+	$("#local_create_email_list_submit").click(function() {
 		
-		var surl = "/createSCWebhook.do";
+		var local_email_list_name = $("#local_create_email_list_form #local_email_list_name").val();
+		var local_email_list_type = $("#local_create_email_list_form #local_email_list_type").val();
+		
+		var params = "local_email_list_name="+local_email_list_name+"&local_email_list_type="+local_email_list_type;
+		
+		var surl = "/saveLocalEmailListMeta.do";
 		$.ajax({
 			type : "POST",
-			timeout : 2000,
-			url : surl,
-			dataType : "text",
-			data : "",	
-			cache : false,
-			async : true,
-			global : false,
-			success : function(data) {
-				data = $.trim(data);
-				if (data == "error") {
-					$("#sc_webhook_address").val("创建失败，请重新创建");
-				} else {
-					window.location.reload();
-				}
-
-			},
-			error : function(t, v) {
-				$("#sc_webhook_address").val("系统错误");
-			}
-		});
-		
-	});
-	
-	$("#save_sc_app_key").click(function() {
-		
-		var sc_app_key = $("#sc_app_key").val();
-		
-		/*TODO: 参数检查*/
-		
-		var params = "sc_app_key="+sc_app_key;
-		var surl = "/saveSCAppKey.do";
-		$.ajax({
-			type : "POST",
-			timeout : 2000,
+			timeout : 30000,
 			url : surl,
 			dataType : "text",
 			data : params,	
@@ -293,196 +341,23 @@
 			success : function(data) {
 				data = $.trim(data);
 				if (data == "error") {
-					$("#sc_app_key").val("参数错误，请检查参数后提交");
+					$("#local_create_email_list_form #alert_msg").html("参数错误，请检查参数后提交");
+					$("#local_create_email_list_form #alert_msg").show();
 				} else if (data == "fail") {
-					$("#sc_app_key").val("保存失败，请重新保存");
-				} else {
-					window.location.reload();
+					$("#local_create_email_list_form #alert_msg").html("注册失败，请重新注册");
+					$("#local_create_email_list_form #alert_msg").show();
+				} else if (data == "success") {
+					window.location.href="listLocalEmailListMeta.do";
 				}
 
 			},
 			error : function(t, v) {
-				$("#sc_app_key").val("系统错误");
+				$("#local_create_email_list_form #alert_msg").html("系统错误");
+				$("#local_create_email_list_form #alert_msg").show();
 			}
 		});
 		
 	});
-	
-	$("#copy_to_clipboard").click(function() {
-		var val = $("#sc_webhook_address").val();
-		alert(val);
-		window.clipboardData.setData('text', val); 
-	});
-	
-		$(function() {
-
-			/* Bar Chart starts */
-
-			var d1 = [];
-			for ( var i = 0; i <= 30; i += 1)
-				d1.push([ i, parseInt(Math.random() * 30) ]);
-
-			var d2 = [];
-			for ( var i = 0; i <= 30; i += 1)
-				d2.push([ i, parseInt(Math.random() * 30) ]);
-
-			var stack = 0, bars = true, lines = false, steps = false;
-
-			function plotWithOptions() {
-				$.plot($("#bar-chart"), [ d1, d2 ], {
-					series : {
-						stack : stack,
-						lines : {
-							show : lines,
-							fill : true,
-							steps : steps
-						},
-						bars : {
-							show : bars,
-							barWidth : 0.8
-						}
-					},
-					grid : {
-						borderWidth : 0,
-						hoverable : true,
-						color : "#777"
-					},
-					colors : [ "#52b9e9", "#0aa4eb" ],
-					bars : {
-						show : true,
-						lineWidth : 0,
-						fill : true,
-						fillColor : {
-							colors : [ {
-								opacity : 0.9
-							}, {
-								opacity : 0.8
-							} ]
-						}
-					}
-				});
-			}
-
-			plotWithOptions();
-
-			$(".stackControls input").click(function(e) {
-				e.preventDefault();
-				stack = $(this).val() == "With stacking" ? true : null;
-				plotWithOptions();
-			});
-			$(".graphControls input").click(function(e) {
-				e.preventDefault();
-				bars = $(this).val().indexOf("Bars") != -1;
-				lines = $(this).val().indexOf("Lines") != -1;
-				steps = $(this).val().indexOf("steps") != -1;
-				plotWithOptions();
-			});
-
-			/* Bar chart ends */
-
-		});
-
-		/* Curve chart starts */
-
-		$(function() {
-			var sin = [], cos = [];
-			for ( var i = 0; i < 14; i += 0.5) {
-				sin.push([ i, Math.sin(i) ]);
-				cos.push([ i, Math.cos(i) ]);
-			}
-
-			var plot = $.plot($("#curve-chart"), [ {
-				data : sin,
-				label : "sin(x)"
-			}, {
-				data : cos,
-				label : "cos(x)"
-			} ], {
-				series : {
-					lines : {
-						show : true,
-						fill : true,
-						fillColor : {
-							colors : [ {
-								opacity : 0.05
-							}, {
-								opacity : 0.01
-							} ]
-						}
-					},
-					points : {
-						show : true
-					}
-				},
-				grid : {
-					hoverable : true,
-					clickable : true,
-					borderWidth : 0
-				},
-				yaxis : {
-					min : -1.2,
-					max : 1.2
-				},
-				colors : [ "#fa3031", "#43c83c" ]
-			});
-
-			function showTooltip(x, y, contents) {
-				$('<div id="tooltip">' + contents + '</div>').css({
-					position : 'absolute',
-					display : 'none',
-					top : y + 5,
-					width : 100,
-					left : x + 5,
-					border : '1px solid #000',
-					padding : '2px 8px',
-					color : '#ccc',
-					'background-color' : '#000',
-					opacity : 0.9
-				}).appendTo("body").fadeIn(200);
-			}
-
-			var previousPoint = null;
-			$("#curve-chart")
-					.bind(
-							"plothover",
-							function(event, pos, item) {
-								$("#x").text(pos.x.toFixed(2));
-								$("#y").text(pos.y.toFixed(2));
-
-								if (item) {
-									if (previousPoint != item.dataIndex) {
-										previousPoint = item.dataIndex;
-
-										$("#tooltip").remove();
-										var x = item.datapoint[0].toFixed(2), y = item.datapoint[1]
-												.toFixed(2);
-
-										showTooltip(item.pageX, item.pageY,
-												item.series.label + " of " + x
-														+ " = " + y);
-									}
-								} else {
-									$("#tooltip").remove();
-									previousPoint = null;
-								}
-							});
-
-			$("#curve-chart")
-					.bind(
-							"plotclick",
-							function(event, pos, item) {
-								if (item) {
-									$("#clickdata").text(
-											"You clicked point "
-													+ item.dataIndex + " in "
-													+ item.series.label + ".");
-									plot.highlight(item.series, item.datapoint);
-								}
-							});
-
-		});
-
-		/* Curve chart ends */
 	</script>
 
 

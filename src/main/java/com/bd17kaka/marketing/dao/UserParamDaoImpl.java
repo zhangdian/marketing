@@ -19,16 +19,18 @@ public class UserParamDaoImpl extends SpringJDBCDaoSupport implements
 
 		String sql = "insert into "
 				+ TableName
-				+ " values(id,?,?,?,now())";
+				+ " values(id,?,?,?,now()) on duplicate key update value=?";
 		Object[] args = new Object[] {
 				userParam.getUserId(),
 				userParam.getParamName(),
+				userParam.getValue(),
 				userParam.getValue()
 				};
 		int[] argTypes = new int[] { 
 				Types.INTEGER, 
 				Types.VARCHAR, 
 				Types.VARCHAR,
+				Types.VARCHAR
 				};
 		return 0 < this.getJdbcTemplate().update(sql, args, argTypes);
 	}

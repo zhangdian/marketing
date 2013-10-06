@@ -37,7 +37,7 @@ String selected_item = request.getParameter("selected_item");
               </a>
 
               <ul>
-                <li><a href="./local_email_list.jsp">邮件地址列表</a></li>
+                <li><a href="./listLocalEmailListMeta.do">邮件地址列表</a></li>
                 <li><a href="#">TODO</a></li>
               </ul>
             </li>

@@ -16,7 +16,10 @@ import com.bd17kaka.marketing.po.UserInfo;
 import com.bd17kaka.marketing.po.UserParam;
 import com.bd17kaka.marketing.service.UserParamService;
 import com.qq.connect.QQConnectException;
+import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.oauth.Oauth;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.weibo.Idol;
 
 /**
  * 与QQ通信认证
@@ -32,7 +35,7 @@ public class LocalQQContoller extends BaseController {
 	public void gotoVerify(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException  {
 
 		try {
-            response.sendRedirect(new Oauth().getAuthorizeURL(request));
+			response.sendRedirect(new Oauth().getAuthorizeURL(request));
         } catch (QQConnectException e) { 
         	
         }
@@ -55,6 +58,34 @@ public class LocalQQContoller extends BaseController {
 			return;
 		}
 		
+//		try {
+//			
+//			String accessToken = null;
+//			String openID = null;
+//	        long tokenExpireIn = 0L;
+//			
+//			AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
+//			if ("".equals(accessTokenObj.getAccessToken())) {
+//				response.sendRedirect("localEmailList.do");
+//				return;
+//			}
+//			
+//			OpenID openIDObj =  new OpenID(accessToken);
+//            openID = openIDObj.getUserOpenID();
+//            
+//            
+//		
+//		} catch (QQConnectException e) {
+//			
+//		}
+		 
+		
+		
+		
+		
+		
+		
+		
 		UserParam userParam = new UserParam(0, userId, "qq_verify_code", code, null);
 		userParamService.insert(userParam);
 		userParam.setParamName("qq_verify_state");;
@@ -62,6 +93,7 @@ public class LocalQQContoller extends BaseController {
 		userParamService.insert(userParam);
 		
 		response.sendRedirect("localEmailList.do");
+		return;
 	}
 		
 }
